@@ -1,5 +1,5 @@
 import React from 'react'
-
+// product list component
 function ProductList({products}) {
   return (
     <div style={{display:"flex",gap:"20px",flexWrap:"wrap"}}>
