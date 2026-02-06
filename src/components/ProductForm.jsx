@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+// product form component
 function ProductForm({ onAdd }) {
     const [name,setName]=
     useState("");
