@@ -1,0 +1,18 @@
+{
+    "products":[
+        {
+            "id":1,
+            "name":"T-shirt",
+            "color":"Black",
+            "quantity":10,
+            "image":"./src/assets/images/Black_O_Crew_Regular_NoPocket.webp"
+        },
+        {
+             "id":2,
+            "name":"shoes",
+            "color":"white",
+            "quantity":5,
+            "image":"./src/assets/images/images.jpg"
+        }
+    ]
+}
