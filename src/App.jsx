@@ -1,38 +1,48 @@
+import React, { useState, useEffect } from 'react';
+
 import ProductForm from './components/ProductForm'
 import ProductList from './components/ProductList'
-import "../src/assets/images/Black_O_Crew_Regular_NoPocket.webp"
-import "../src/assets/images/images.jpg"
-import './App.css'
-import { useEffect, useState } from 'react'
+ 
+
+ import './App.css'
 
 function App() {
-  const[products,setproducts]=useState([]);
-  useEffect(()=>{
-    fetch("http://localhost:3001/products")
-    .then((res)=>res.json())
-    .then(data=>setproducts(data))
-  },[])
+  const [products, setProducts] = useState([]);
 
-  const addProduct=(newProduct)=>{
-    fetch("http://localhost:3001/products",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",},
-        body:JSON.stringify(newProduct),
-      })
-      .then((res)=>res.json())
-      .then(data=>setproducts(data))
+  // جلب البيانات من json-server عند التحميل
+  useEffect(() => {
+    fetch('http://localhost:3001/products')
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      
+  }, []);
 
-    
+  // وظيفة لإضافة منتج جديد
+  const addProduct = (product) => {
+    fetch('http://localhost:3001/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(product)
+    })
+      .then(res => res.json())
+      .then(newProduct => setProducts([...products, newProduct]))
+      
+  };
+ // حذف منتج
+  const handleDeleteProduct = (id) => {
+    fetch('http://localhost:3001/products', { method: "DELETE" })
+      .then(() => setProducts(products.filter(p => p.id !== id)));
   };
 
   return (
-    <>
-    <h1>order prodect</h1>
-   <ProductForm onAdd={addProduct}/>
-   <ProductList products={products}/>
-    </>
-  )
+    <div>
+      <h1>Product Management</h1>
+      <ProductForm addProduct={addProduct} />
+      <ProductList products={products}  deleteProduct={handleDeleteProduct}/>
+    </div>
+  );
 }
 
-export default App
+export default App;

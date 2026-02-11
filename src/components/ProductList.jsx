@@ -1,18 +1,26 @@
-import React from 'react'
-// product list component
-function ProductList({products}) {
+
+
+import React from 'react';
+            
+function ProductList({ products ,deleteProduct}) {
   return (
-    <div style={{display:"flex",gap:"20px",flexWrap:"wrap"}}>
-        {products.map((product)=>(
-            <div className='productcard' key={product.id} >
-                <img className='productimage' src={product.image} />
-            <h1>{product.name}</h1>
-            <p>color:{product.color}</p>
-            <p>number:{product.quantity}</p>
-            </div>
-        ))} 
+    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }} >
+      {products.map(product => (
+        <div key={product.id} style={{ border: '1px solid gray', padding: '10px', width: '200px' }} className='productcard'>
+          <img className='productimage'
+            src="../../src/assets/images/clothing-store-logo-design-with-hanger-illustration-vector.jpg" 
+            alt="product" 
+            style={{ width: '100%', height: 'auto' }} 
+          />
+          <h3>{product.name}</h3>
+          <p>Color: {product.color}</p>
+          <p>Quantity: {product.quantity}</p>
+      <button onClick={()=>deleteProduct(product.id)}>delete</button>
+
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
-export default ProductList
+export default ProductList;
